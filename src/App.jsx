@@ -85,9 +85,10 @@ const [zombieFighters, setZombieFighters] = useState([
   ]);
 
   const handleDeleteFighter = (fighter) => {
-    const newTeamArray = team.filter(fighter => teamMember !== fighter);
+    const newTeamArray = [...team];
+    newTeamArray.splice(newTeamArray.indexOf(fighter), 1);
     setTeam(newTeamArray);
-    setMoney(money + fighter.price);
+    setMoney(prevMoney => prevMoney + fighter.price);
     setTotalStrength(totalStrength - fighter.strength);
     setTotalAgility(totalAgility - fighter.agility);
   }
